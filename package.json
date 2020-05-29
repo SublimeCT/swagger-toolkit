@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "parcel watch ./src/main.ts --target node",
-    "build": "parcel build ./src/main.ts --target node --no-content-hash"
+    "build": "parcel build ./src/main.ts --target node --no-content-hash",
+    "test": "cd test_dir && ../bin/swagger-tool"
   },
   "devDependencies": {
     "@types/yargs": "^15.0.5",
@@ -14,6 +15,8 @@
   },
   "dependencies": {
     "@types/inquirer": "^6.5.0",
+    "@types/swagger-schema-official": "^2.0.21",
+    "class-transformer": "^0.2.3",
     "inquirer": "^7.1.0",
     "yargs": "^15.3.1"
   },

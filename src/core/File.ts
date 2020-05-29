@@ -31,4 +31,11 @@ export class File {
             throw new Error()
         }
     }
+    static saveToLocal(raw: string, savePath: string) {
+        try {
+            fs.writeFileSync(savePath, raw)
+        } catch(err) {
+            Logger.error('write swagger.dos.json failed, message: ' + err.message, LoggerCode.HANDLE_FILE_FAILED)
+        }
+    }
 }

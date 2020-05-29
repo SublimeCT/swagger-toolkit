@@ -12,6 +12,7 @@ export enum LoggerCode {
     INTERNAL_ERROR = 'INTERNAL_ERROR',
     EXEC_PATH_WRONG = 'EXEC_PATH_WRONG',
     HANDLE_FILE_FAILED = 'HANDLE_FILE_FAILED',
+    DOWNLOAD_FAILED = 'DOWNLOAD_FAILED',
 }
 
 export interface LoggerOptions {
@@ -37,11 +38,10 @@ export class Logger {
         }
         Logger.log(options)
     }
-    static info(message: string, code?: LoggerCode) {
+    static info(message: string, category?: string) {
         const options: LoggerOptions = {
             tag: LoggerTag.INFO,
             message,
-            code
         }
         Logger.log(options)
     }

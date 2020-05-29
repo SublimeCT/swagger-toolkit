@@ -8,17 +8,26 @@ export class ConfigOptions {
      */
     static readonly defaultConfigPath: string = './swagger.conf.js'
     /**
-     * API 站点地址文档路径
+     * API doc.json path
      */
-    readonly docPath?: string = '/docs/index.html'
+    readonly docJSONPath: string = './swagger.doc.json'
     /**
      * API 站点地址文档路径
      */
-    readonly path?: string = '/docs/doc.json'
+    readonly docPath: string = '/docs/index.html'
+    /**
+     * API 站点地址文档路径
+     */
+    readonly path: string = '/docs/doc.json'
     /**
      * 本地项目中的 model 类存放目录
      */
-    readonly modelDir?: string = 'src/models'
+    readonly modelDir: string = 'src/models'
+
+    get docJSONURL(): string {
+        return this.site + this.path
+    }
+
     constructor(
         /**
          * API 站点地址 host 部分
@@ -28,9 +37,11 @@ export class ConfigOptions {
         docPath?: string,
         path?: string,
         modelDir?: string,
+        docJSONPath?: string,
     ) {
         if (docPath) this.docPath = docPath
         if (path) this.path = path
         if (modelDir) this.modelDir = modelDir
+        if (docJSONPath) this.docJSONPath = docJSONPath
     }
 }
