@@ -1,0 +1,19 @@
+{
+  "name": "swagger-toolkit",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "parcel watch ./src/main.ts --target node",
+    "build": "parcel build ./src/main.ts --target node --no-content-hash"
+  },
+  "devDependencies": {
+    "@types/yargs": "^15.0.5",
+    "typescript": "^3.9.3"
+  },
+  "dependencies": {
+    "@types/inquirer": "^6.5.0",
+    "inquirer": "^7.1.0",
+    "yargs": "^15.3.1"
+  }
+}
