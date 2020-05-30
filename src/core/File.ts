@@ -55,6 +55,7 @@ export class File {
     static async saveToLocal(raw: string, savePath: string): Promise<void> {
         try {
             await File.writeFile(savePath, raw)
+            Logger.info(`\tsave local file finished!, path: ${savePath}, raw: (${raw.substr(0, 30)})`)
         } catch(err) {
             Logger.error('write swagger.dos.json failed, message: ' + err.message, LoggerCode.HANDLE_FILE_FAILED)
         }

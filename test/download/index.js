@@ -77,7 +77,8 @@ describe('1. 输入参数检测', function() {
         // 先删除本地的 package.json
         it('应该将 doc.json 下载到本地', async function () {
             const config = new ConfigOptions({
-                site: 'http://api.lynee.cn',
+                site: 'https://petstore.swagger.io/',
+                path: 'v2/swagger.json',
                 docJSONPath,
             })
             const tool = new SwaggerTool('', null, null, config)
@@ -88,9 +89,6 @@ describe('1. 输入参数检测', function() {
                 expect(res).to.be.undefined
                 return res
             })
-        })
-        after(async () => {
-            await createDocJson(docJSONPath)
         })
     })
 })

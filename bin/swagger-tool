@@ -2,7 +2,7 @@
 const yargs = require('yargs')
 const path = require('path')
 const { version } = require('../package.json')
-const { SwaggerTool, ConfigOptions } = require('../dist/main.js')
+const { SwaggerTool, ConfigOptions } = require('../build/main.js')
 
 const argv = yargs
     .usage('Usage: swagger-tool -c [swagger.conf.js] -m [module name] -e [entity name]')
@@ -18,6 +18,33 @@ const argv = yargs
         type: 'string',
         describe: '需要创建或同步的 API 实体',
     })
+    .option('site', {
+        alias: 's',
+        type: 'string',
+        describe: 'API URL, 不包含 path 部分',
+        example: ConfigOptions.siteExample
+    })
+    .option('path', {
+        alias: 'p',
+        type: 'string',
+        describe: 'API URL, path 部分',
+        example: ConfigOptions.pathExample
+    })
+    .option('docJSONPath', {
+        type: 'string',
+        describe: 'API 文档保存路径',
+        default: ConfigOptions.defaultDocJSONPath
+    })
+    .option('docPath', {
+        type: 'string',
+        describe: 'API dos.json 路径',
+        default: ConfigOptions.defaultDocPath
+    })
+    .option('modelDir', {
+        type: 'string',
+        describe: '本地项目中的 model 类存放目录',
+        default: ConfigOptions.defaultModelDir
+    })
     .option('config', {
         alias: 'c',
         default: ConfigOptions.defaultConfigPath,
@@ -32,7 +59,14 @@ const argv = yargs
     .argv
 
 const main = async () => {
-    const tool = new SwaggerTool(path.join(process.cwd(), argv.config), argv.module, argv.entity)
+    const options = new ConfigOptions({
+        site: argv.site,
+        path: argv.path,
+        docJSONPath: argv.docJSONPath,
+        docPath: argv.docPath,
+        modelDir: argv.modelDir,
+    })
+    const tool = new SwaggerTool(path.join(process.cwd(), argv.config), argv.module, argv.entity, options)
     await tool.run()
     console.log('--------  done  --------')
 }

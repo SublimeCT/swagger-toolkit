@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SwaggerDoc = void 0;
 /**
  * swagger doc.json struct
  */

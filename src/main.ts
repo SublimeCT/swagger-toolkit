@@ -27,7 +27,7 @@ export class SwaggerTool {
     ) {}
 
     async run() {
-        Logger.info('1. 检查是否位于项目根目录')
+        Logger.info('1. 检查是否位于项目根目录(检测当前执行目录下是否存在 `package.json`)')
         const isInRoot = await File.hasPackageJSON()
         if (!isInRoot) Logger.error('must in root directory', LoggerCode.EXEC_PATH_WRONG)
         Logger.info('2. 从传入的参数或配置文件载入自定义配置')
@@ -46,7 +46,7 @@ export class SwaggerTool {
         }
         const contents = await Doc.download(this.config.docJSONURL)
         this.doc = Doc.fromJSON(contents)
-        Logger.info(`doc.json save path: ${this.config.docJSONPath}`)
-        File.saveToLocal(contents, this.config.docJSONPath)
+        Logger.info(`\tdoc.json save path: ${this.config.docJSONPath}`)
+        await File.saveToLocal(contents, this.config.docJSONPath)
     }
 }

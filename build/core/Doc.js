@@ -3,7 +3,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Doc = void 0;
 var SwaggerDoc_1 = require("../typings/SwaggerDoc");
 var class_transformer_1 = require("class-transformer");
 var http_1 = __importDefault(require("http"));
@@ -35,7 +34,7 @@ var Doc = /** @class */ (function () {
             requester
                 .get(url, { timeout: 7000 }, function (res) {
                 if (res.statusCode !== 200) {
-                    Logger_1.Logger.error('doc.json download failed -2, status code: ' + res.statusCode, Logger_1.LoggerCode.DOWNLOAD_FAILED);
+                    Logger_1.Logger.error("doc.json download failed -2, status code: " + res.statusCode, Logger_1.LoggerCode.DOWNLOAD_FAILED);
                     res.resume();
                 }
                 res.setEncoding('utf8');
@@ -45,7 +44,9 @@ var Doc = /** @class */ (function () {
                     try {
                         if (!rawData)
                             Logger_1.Logger.error('doc.json download failed -4', Logger_1.LoggerCode.DOWNLOAD_FAILED);
-                        resolve(rawData);
+                        Logger_1.Logger.debug("download finished! \t contents: (" + rawData.substr(0, 30) + " ...)", 'download');
+                        var jsonData = JSON.parse(rawData);
+                        resolve(JSON.stringify(jsonData, null, 4));
                     }
                     catch (e) {
                         Logger_1.Logger.error('doc.json download failed -3', Logger_1.LoggerCode.DOWNLOAD_FAILED);

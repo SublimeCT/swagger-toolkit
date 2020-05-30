@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Logger = exports.LoggerCode = exports.LoggerTag = void 0;
 var config_1 = require("../typings/config");
 var LoggerTag;
 (function (LoggerTag) {

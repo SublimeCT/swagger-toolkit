@@ -1,25 +1,24 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ConfigOptions = void 0;
 var Logger_1 = require("../core/Logger");
 var ConfigOptions = /** @class */ (function () {
     function ConfigOptions(options) {
         /**
-         * API doc.json path
+         * API 文档保存路径
          */
-        this.docJSONPath = './swagger.doc.json';
+        this.docJSONPath = ConfigOptions.defaultDocJSONPath;
         /**
          * API 站点地址文档路径
          */
-        this.docPath = '/docs/index.html';
+        this.docPath = ConfigOptions.defaultDocPath;
         /**
-         * API 站点地址文档路径
+         * API dos.json 路径
          */
-        this.path = '/docs/doc.json';
+        this.path = ConfigOptions.defaultPath;
         /**
          * 本地项目中的 model 类存放目录
          */
-        this.modelDir = 'src/models';
+        this.modelDir = ConfigOptions.defaultModelDir;
         this.site = options.site;
         Logger_1.Logger.debug('config: \n' + JSON.stringify(options, null, 4), 'config');
         if (options.docPath)
@@ -35,7 +34,7 @@ var ConfigOptions = /** @class */ (function () {
         get: function () {
             return this.site + this.path;
         },
-        enumerable: false,
+        enumerable: true,
         configurable: true
     });
     /**
@@ -43,9 +42,33 @@ var ConfigOptions = /** @class */ (function () {
      */
     ConfigOptions.lOGGER_PREFIX = '[swagger-toolkit]';
     /**
+     * API 站点 site 示例
+     */
+    ConfigOptions.siteExample = 'https://petstore.swagger.io';
+    /**
+     * API 站点 site 示例
+     */
+    ConfigOptions.pathExample = '/v2/swagger.json';
+    /**
      * 默认的配置文件路径
      */
     ConfigOptions.defaultConfigPath = './swagger.conf.js';
+    /**
+     * 默认的 API 文档保存路径
+     */
+    ConfigOptions.defaultDocJSONPath = './swagger.doc.json';
+    /**
+     * 默认的 API 文档文件路径
+     */
+    ConfigOptions.defaultDocPath = '/docs/index.html';
+    /**
+     * 默认的 API dos.json 路径
+     */
+    ConfigOptions.defaultPath = '/docs/doc.json';
+    /**
+     * 默认的 model 类存放目录
+     */
+    ConfigOptions.defaultModelDir = 'src/models';
     return ConfigOptions;
 }());
 exports.ConfigOptions = ConfigOptions;

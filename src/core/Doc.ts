@@ -29,7 +29,7 @@ export class Doc {
             requester
                 .get(url, { timeout: 7000 }, res => {
                     if (res.statusCode !== 200) {
-                        Logger.error('doc.json download failed -2, status code: ' + res.statusCode, LoggerCode.DOWNLOAD_FAILED)
+                        Logger.error(`doc.json download failed -2, status code: ${res.statusCode}`, LoggerCode.DOWNLOAD_FAILED)
                         res.resume()
                     }
                     res.setEncoding('utf8')
@@ -38,7 +38,9 @@ export class Doc {
                     res.on('end', () => {
                         try {
                             if (!rawData) Logger.error('doc.json download failed -4', LoggerCode.DOWNLOAD_FAILED)
-                            resolve(rawData)
+                            Logger.debug(`download finished! \t contents: (${rawData.substr(0, 30)} ...)`, 'download')
+                            const jsonData = JSON.parse(rawData)
+                            resolve(JSON.stringify(jsonData, null, 4))
                         } catch (e) {
                             Logger.error('doc.json download failed -3', LoggerCode.DOWNLOAD_FAILED)
                         }

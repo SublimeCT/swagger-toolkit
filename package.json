@@ -7,8 +7,8 @@
   "scripts": {
     "dev": "parcel watch ./src/main.ts --target node",
     "build": "parcel build ./src/main.ts --target node --no-content-hash",
-    "test-command": "cd test_dir && ../bin/swagger-tool",
-    "test": "cd test && mocha index.js --timeout 5000 --reporter mochawesome"
+    "test-command": "cd test_dir && ../bin/swagger-tool --site 'https://petstore.swagger.io' --path '/v2/swagger.json'",
+    "test": "cd test && mocha index.js --timeout 7000 --reporter mochawesome"
   },
   "devDependencies": {
     "@types/yargs": "^15.0.5",

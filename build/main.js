@@ -36,13 +36,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SwaggerTool = void 0;
 var File_1 = require("./core/File");
 var config_1 = require("./typings/config");
 var Logger_1 = require("./core/Logger");
 var Doc_1 = require("./core/Doc");
 var config_2 = require("./typings/config");
-Object.defineProperty(exports, "ConfigOptions", { enumerable: true, get: function () { return config_2.ConfigOptions; } });
+exports.ConfigOptions = config_2.ConfigOptions;
 var SwaggerTool = /** @class */ (function () {
     function SwaggerTool(
     /**
@@ -73,7 +72,7 @@ var SwaggerTool = /** @class */ (function () {
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        Logger_1.Logger.info('1. 检查是否位于项目根目录');
+                        Logger_1.Logger.info('1. 检查是否位于项目根目录(检测当前执行目录下是否存在 `package.json`)');
                         return [4 /*yield*/, File_1.File.hasPackageJSON()];
                     case 1:
                         isInRoot = _b.sent();
@@ -114,8 +113,10 @@ var SwaggerTool = /** @class */ (function () {
                     case 1:
                         contents = _a.sent();
                         this.doc = Doc_1.Doc.fromJSON(contents);
-                        Logger_1.Logger.info("doc.json save path: " + this.config.docJSONPath);
-                        File_1.File.saveToLocal(contents, this.config.docJSONPath);
+                        Logger_1.Logger.info("\tdoc.json save path: " + this.config.docJSONPath);
+                        return [4 /*yield*/, File_1.File.saveToLocal(contents, this.config.docJSONPath)];
+                    case 2:
+                        _a.sent();
                         return [2 /*return*/];
                 }
             });
