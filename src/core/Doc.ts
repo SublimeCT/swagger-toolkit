@@ -24,11 +24,12 @@ export class Doc {
      */
     static download(url: string): Promise<string> {
         const requester = Doc.getRequester(url)
+        Logger.info(`download from ${url} ...`, 'download')
         return new Promise((resolve) => {
             requester
                 .get(url, { timeout: 7000 }, res => {
                     if (res.statusCode !== 200) {
-                        Logger.error('doc.json download failed -2', LoggerCode.DOWNLOAD_FAILED)
+                        Logger.error('doc.json download failed -2, status code: ' + res.statusCode, LoggerCode.DOWNLOAD_FAILED)
                         res.resume()
                     }
                     res.setEncoding('utf8')

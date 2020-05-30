@@ -2,6 +2,7 @@ import { ConfigOptions } from '../typings/config'
 
 export enum LoggerTag {
     INFO = '💬',
+    DEBUG = '🎬',
     WARNING = '⚠️',
     ERROR = '❌',
 }
@@ -27,7 +28,9 @@ export class Logger {
     static log(options: LoggerOptions) {
         const msg = `${ConfigOptions.lOGGER_PREFIX} ${options.tag} ${options.category ? `[${options.category}]` : ''} ${options.code ? `<Code: ${options.code}>` : ''} ${options.message}`
         console.log(msg)
-        if (options.exit) process.exit()
+        // 当处于测试环境时, process.exit() 会导致线程终止, 无法执行后续的断言, 所以改为抛出异常
+        // if (options.exit) process.exit()
+        if (options.exit) throw new Error(`${ConfigOptions.lOGGER_PREFIX} ⛔️`)
     }
     static error(message: string, code: LoggerCode, exit: boolean = true) {
         const options: LoggerOptions = {
@@ -41,6 +44,13 @@ export class Logger {
     static info(message: string, category?: string) {
         const options: LoggerOptions = {
             tag: LoggerTag.INFO,
+            message,
+        }
+        Logger.log(options)
+    }
+    static debug(message: string, category?: string) {
+        const options: LoggerOptions = {
+            tag: LoggerTag.DEBUG,
             message,
         }
         Logger.log(options)

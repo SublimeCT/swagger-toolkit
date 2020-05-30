@@ -25,14 +25,16 @@ const argv = yargs
         required: true,
         describe: '脚本配置文件, 详见 README.md'
     })
-    .example('swagger-tool', '使用默认配置 并下载 `doc.json` 文件')
-    .example('swagger-tool -c conf.js', '使用指定配置文件 并下载 `doc.json` 文件')
-    .example('swagger-tool -m User -e commoditys.Commodity', '下载 `doc.json` 文件 并 ')
+    .example('swagger-tool', '使用默认配置 并下载 `doc.json` 文件, 可交互式选择更新的模块')
+    .example('swagger-tool --download', '使用默认配置 并仅下载 `doc.json` 文件')
+    .example('swagger-tool -c conf.js', '使用指定配置文件 并下载 `doc.json` 文件, 可交互式选择更新的模块')
+    .example('swagger-tool -m User -e commoditys.Commodity', '下载 `doc.json` 文件 并 更新指定的实体数据')
     .argv
 
-const main = () => {
+const main = async () => {
     const tool = new SwaggerTool(path.join(process.cwd(), argv.config), argv.module, argv.entity)
-    console.log(tool)
+    await tool.run()
+    console.log('--------  done  --------')
 }
 
 main()

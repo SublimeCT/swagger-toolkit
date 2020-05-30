@@ -6,11 +6,15 @@
   "scripts": {
     "dev": "parcel watch ./src/main.ts --target node",
     "build": "parcel build ./src/main.ts --target node --no-content-hash",
-    "test": "cd test_dir && ../bin/swagger-tool"
+    "test-command": "cd test_dir && ../bin/swagger-tool",
+    "test": "cd test && mocha index.js --timeout 5000 --reporter mochawesome"
   },
   "devDependencies": {
     "@types/yargs": "^15.0.5",
+    "chai": "^4.2.0",
     "cz-conventional-changelog": "^3.2.0",
+    "mocha": "^7.2.0",
+    "mochawesome": "^6.1.1",
     "typescript": "^3.9.3"
   },
   "dependencies": {
