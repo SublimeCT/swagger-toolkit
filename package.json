@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "bin": "bin/swagger-tool",
   "scripts": {
     "dev": "parcel watch ./src/main.ts --target node",
     "build": "parcel build ./src/main.ts --target node --no-content-hash",
