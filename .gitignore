@@ -1,5 +1,7 @@
 # parcel cache
 .cache
+# mocha report assets
+test/mochawesome-report/*
 
 .DS_Store
 node_modules
